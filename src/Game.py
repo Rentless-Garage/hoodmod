@@ -1,9 +1,9 @@
 import pygame
 
 class Game():
-	def __init__(self, caption: str, size: tuple[int, int]) -> None:
+	def __init__(self, caption: str, x, y) -> None:
 		pygame.init()
-		self.wind = pygame.display.set_mode(size)
+		self.wind = pygame.display.set_mode((x, y))
 		pygame.display.set_caption(caption)
 		self.clock = pygame.time.Clock()
 		self.running = False
@@ -18,8 +18,11 @@ class Game():
 				if event.type == pygame.QUIT:
 					self.running = False
 					pygame.quit()
-		self.render()
-		self.clock.tick(60)
+
+			if not self.running:
+				break
+			self.render()
+			self.clock.tick(60)
 
 	def render(self) -> None:
 		self.wind.fill("purple")
